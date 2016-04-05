@@ -1,0 +1,12 @@
+version: '2'
+services:
+  web:
+    build: ./php-fluentd
+    ports:
+      - "8080:80"
+    volumes:
+      - ./php-fluentd/src:/var/www/html
+    depends_on:
+      - log_center
+  log_center:
+    build: ./log_center
