@@ -10,3 +10,15 @@ services:
       - log_center
   log_center:
     build: ./log_center
+    depends_on:
+      - log_strage
+  log_strage:
+    image: mongo
+  log_viewer:
+    image: knickers/mongo-express
+    ports:
+      - "8081:8081"
+    depends_on:
+      - log_strage
+    environment:
+      - ME_CONFIG_MONGODB_SERVER=log_strage
